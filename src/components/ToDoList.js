@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button,FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 
- export default class ToDoList extends Component {
+import * as todoActions from '../actions/ToDos'
+
+class ToDoList extends Component {
 
   constructor(props) {
     super(props);
     this.state = { text: '',
       error:''
     };
+
+
   }
 
   press = () =>{
-    alert("PRESS")
+    alert(this.props )
+    console.log(this.props)
+
   }
-
-  errorHandler(code, message) {
-  this.setState({
-    error: !code ? null :
-      {
-        code,
-        message,
-      }
-  })
-}
-
 
   render(){
     return(
@@ -49,3 +46,8 @@ import { Button,FormLabel, FormInput, FormValidationMessage } from 'react-native
     );
   }
 }
+const mapDispatchToProps = dispatch=>
+  bindActionCreators(todoActions,dispatch);
+
+
+export default connect(null,mapDispatchToProps)(ToDoList)

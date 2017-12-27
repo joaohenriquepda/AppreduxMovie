@@ -1,8 +1,6 @@
 const ToDoList = (state = [], action) => {
-
-
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
+    case 'ADD_TODO':
       return [...state,
         {
           id: Math.random,
@@ -11,9 +9,6 @@ const ToDoList = (state = [], action) => {
     default:
       return state
   }
-
-
-
 }
 
 export default ToDoList
