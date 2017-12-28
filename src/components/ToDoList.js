@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, TextInput } from 'react-native';
-import { Button,FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
+import { AppRegistry, StyleSheet, Text, View, TextInput,FlatList } from 'react-native';
+import { Button,
+  FormLabel,
+  FormInput,
+  FormValidationMessage,
+ } from 'react-native-elements'
+
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 
 import * as todoActions from '../actions/ToDos'
 
@@ -11,22 +16,28 @@ class ToDoList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: '',
-      error:''
+    this.state = {
+      text: '',
+      error:'',
     };
-
 
   }
 
-  press = () =>{
-    alert(this.props )
+  addTodo = () =>{
+    this.props.addToDo(this.state.text);
+    this.setState({text:''})
+    alert(this.props.todos.length)
     console.log(this.props)
-
   }
 
   render(){
     return(
     <View>
+    <FlatList
+      data={this.props.todos}
+      renderItem={({item}) => <Text>{item.text}</Text>}
+    />
+
       <FormLabel>Name ToDo</FormLabel>
       <TextInput
         shake={this.state.error}
@@ -38,7 +49,7 @@ class ToDoList extends Component {
           raised
           icon={{name: 'add'}}
           onPress={()=>{
-            this.press()
+            this.addTodo()
           }}
           title="Add new ToDo"
           />
@@ -46,8 +57,12 @@ class ToDoList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  todos: state.ToDoList
+})
+
 const mapDispatchToProps = dispatch=>
   bindActionCreators(todoActions,dispatch);
 
-
-export default connect(null,mapDispatchToProps)(ToDoList)
+export default connect(mapStateToProps,mapDispatchToProps)(ToDoList)
