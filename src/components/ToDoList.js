@@ -26,13 +26,11 @@ class ToDoList extends Component {
   addTodo = () =>{
     this.props.addToDo(this.state.text);
     this.setState({text:''})
-    alert(this.props.todos.length)
-    console.log(this.props)
   }
 
   render(){
     return(
-    <View>
+    <View style={styles.container}>
     <FlatList
       data={this.props.todos}
       renderItem={({item}) => <Text>{item.text}</Text>}
@@ -66,3 +64,13 @@ const mapDispatchToProps = dispatch=>
   bindActionCreators(todoActions,dispatch);
 
 export default connect(mapStateToProps,mapDispatchToProps)(ToDoList)
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

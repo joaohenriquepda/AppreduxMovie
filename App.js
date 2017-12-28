@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import store from './src/store/';
 import ToDoList  from './src/components/ToDoList'
+import Counter  from './src/components/Counter'
 
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
       <Provider store={store}>
         <View style={styles.container}>
           <ToDoList/>
+          <Counter/>
         </View>
       </Provider>
     );
