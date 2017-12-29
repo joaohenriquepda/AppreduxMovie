@@ -28,6 +28,11 @@ class ToDoList extends Component {
     this.setState({text:''})
   }
 
+  fetchToDo = () =>{
+    this.props.fetchToDo(this.state.text);
+    this.setState({text:''})
+  }
+
   render(){
     return(
     <View style={styles.container}>
@@ -51,6 +56,14 @@ class ToDoList extends Component {
           }}
           title="Add new ToDo"
           />
+          <Button
+            raised
+            icon={{name: 'add'}}
+            onPress={()=>{
+              this.fetchToDo()
+            }}
+            title="Loading ToDos"
+            />
     </View>
     );
   }
